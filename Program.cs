@@ -33,9 +33,19 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast");
 
+app.MapPost("/weatherforecast", (WeatherForecastRequest request) =>
+{
+    var summary = summaries[Random.Shared.Next(summaries.Length)];
+    var forecast = new WeatherForecast(request.Date, request.TemperatureC, summary);
+    return Results.Created("/weatherforecast", forecast);
+})
+.WithName("CreateWeatherForecast");
+
 app.Run();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
+
+record WeatherForecastRequest(DateOnly Date, int TemperatureC);

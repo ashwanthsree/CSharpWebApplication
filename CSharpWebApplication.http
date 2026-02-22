@@ -4,3 +4,13 @@ GET {{CSharpWebApplication_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+POST {{CSharpWebApplication_HostAddress}}/weatherforecast/
+Content-Type: application/json
+
+{
+  "date": "2026-02-23",
+  "temperatureC": 25
+}
+
+###
